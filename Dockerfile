@@ -13,6 +13,7 @@ RUN npm test
 # DEPLOY
 FROM node:20-alpine AS deploy
 WORKDIR /app
-COPY --from=build /app/dist ./dist 
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/bin ./bin
 COPY --from=build /app/package*.json ./
 ENTRYPOINT ["node", "bin/markdown-it.js"]
